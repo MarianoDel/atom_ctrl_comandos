@@ -9,18 +9,21 @@
 #define HARD_H_
 
 //-------- Board Configuration -----------------------//
-#define VER_1_0
+//#define VER_1_0
+#define VER_1_1
 
-//--- Tipo de control o ninguno con WITHOUT_POTE
-//#define WITH_POTE
+//--- Pruebas de hardware, consumo sin int
+//#define WITHOUT_INT
+#define WITH_INT
+
 //#define WITH_1_TO_10
 //#define WITHOUT_POTE
 
 //#ifdef VER_1_0
-//#define BOOST_CONVENCIONAL	//placa anterior del tamaño de la F12V5A ultimo prog 13-07-16
+//#define BOOST_CONVENCIONAL	//placa anterior del tamaï¿½o de la F12V5A ultimo prog 13-07-16
 //#endif
 
-#ifdef VER_1_0
+#if defined (VER_1_0) || defined (VER_1_1)
 //GPIOA pin0
 #define S1 ((GPIOA->IDR & 0x0001) == 0)
 

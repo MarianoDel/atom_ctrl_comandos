@@ -146,6 +146,9 @@ int main(void)
 
 	RandomGen(timer_tick);
 
+	RX_EN_OFF;
+	RX_CODE_PLLUP_OFF;
+
 	//--- Main loop ---//
 	while(1)
 	{
@@ -374,7 +377,13 @@ int main(void)
 			case SLEEPING:
 				if (!timer_for_stop)
 				{
+#ifdef WITH_INT
 					EXTIOn();
+#endif
+
+#ifdef WITHOUT_INT
+					EXTIOff();
+#endif
 
 					if (GPIOA_CLK)
 						GPIOA_CLK_OFF;
@@ -489,8 +498,3 @@ void TimingDelay_Decrement(void)
 	timer_tick++;
 
 }
-
-
-
-
-

@@ -2505,9 +2505,9 @@ KR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t KR;   \/*!< IWDG Key register,      
 LCKR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t LCKR;         \/*!< GPIO port configuration lock register,                    Address offset: 0x1C *\/$/;"	m	struct:__anon31
 LDFLAGS	Makefile	/^LDFLAGS = $(MCFLAGS) -mthumb --specs=nano.specs -Wl,--gc-sections -nostartfiles -T$(LDSCRIPT) -Wl,-Map=$(FULL_PRJ).map,--cref,--no-warn-mismatch $(LIBDIR)$/;"	m
 LDSCRIPT	Makefile	/^LDSCRIPT = $(LINKER)\/stm32_flash.ld$/;"	m
-LED	src/hard.h	28;"	d
-LED_OFF	src/hard.h	30;"	d
-LED_ON	src/hard.h	29;"	d
+LED	src/hard.h	31;"	d
+LED_OFF	src/hard.h	33;"	d
+LED_ON	src/hard.h	32;"	d
 LIBDIR	Makefile	/^LIBDIR  = $(patsubst %,-L%,$(DLIBDIR) $(ULIBDIR))$/;"	m
 LIBS	Makefile	/^LIBS    = $(DLIBS) $(ULIBS)$/;"	m
 LIBSDIR	Makefile	/^LIBSDIR    = ..\/STM32F0xx_StdPeriph_Lib_V1.3.1\/Libraries\/STM32F0xx_StdPeriph_Driver$/;"	m
@@ -2958,7 +2958,7 @@ RDLR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RDLR; \/*!< CAN receive FIFO mailb
 RDP	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t RDP;          \/*!< FLASH option byte Read protection,             Address offset: 0x00 *\/$/;"	m	struct:__anon30
 RDR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t RDR;    \/*!< USART Receive Data register,              Address offset: 0x24 *\/$/;"	m	struct:__anon41
 RDTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RDTR; \/*!< CAN receive FIFO mailbox data length control and time stamp register *\/$/;"	m	struct:__anon17
-REPEAT_CODES	src/hard.h	97;"	d
+REPEAT_CODES	src/hard.h	100;"	d
 RESERVED	cmsis_boot/stm32f0xx.h	/^       uint32_t RESERVED;    \/*!< Reserved,                                                                  0x04 *\/$/;"	m	struct:__anon32
 RESERVED	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RESERVED;     \/*!< Reserved,                                                     0x18 *\/$/;"	m	struct:__anon29
 RESERVED0	cmsis_boot/stm32f0xx.h	/^  uint16_t      RESERVED0;       \/*!< Reserved,                                                    0x02 *\/$/;"	m	struct:__anon39
@@ -3303,12 +3303,12 @@ RTSR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RTSR;         \/*!<EXTI Rising tri
 RXCRCR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t RXCRCR;   \/*!< SPI Rx CRC register (not used in I2S mode),          Address offset: 0x14 *\/$/;"	m	struct:__anon38
 RXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RXDR;         \/*!< CEC Rx Data Register,                                       Address offset:0x0C *\/$/;"	m	struct:__anon20
 RXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t RXDR;     \/*!< I2C Receive data register,         Address offset: 0x24 *\/$/;"	m	struct:__anon33
-RX_CODE	src/hard.h	43;"	d
+RX_CODE	src/hard.h	46;"	d
 RX_CODE_PLLUP_OFF	src/codes.h	14;"	d
 RX_CODE_PLLUP_ON	src/codes.h	13;"	d
-RX_EN	src/hard.h	46;"	d
-RX_EN_OFF	src/hard.h	48;"	d
-RX_EN_ON	src/hard.h	47;"	d
+RX_EN	src/hard.h	49;"	d
+RX_EN_OFF	src/hard.h	51;"	d
+RX_EN_ON	src/hard.h	50;"	d
 RX_S	src/hard.h	/^	RX_S,$/;"	e	enum:__anon8
 RX_S_A	src/hard.h	/^	RX_S_A,$/;"	e	enum:__anon8
 RX_S_NOK	src/hard.h	/^	RX_S_NOK,$/;"	e	enum:__anon8
@@ -3322,8 +3322,8 @@ RecvCode16	src/codes.c	/^unsigned char RecvCode16 (unsigned char * bits)$/;"	f
 RecvCode16Reset	src/codes.c	/^inline void RecvCode16Reset (void)$/;"	f
 Reset_Handler	cmsis_boot/startup/startup_stm32f0xx.s	/^Reset_Handler:$/;"	l
 RspMessages	src/hard.h	/^} typedef RspMessages;$/;"	t
-S1	src/hard.h	25;"	d
-S2	src/hard.h	40;"	d
+S1	src/hard.h	28;"	d
+S2	src/hard.h	43;"	d
 SAVE_PARAMS	src/hard.h	/^	SAVE_PARAMS,$/;"	e	enum:__anon8
 SAVE_S1	src/main.c	55;"	d	file:
 SAVE_S2	src/main.c	56;"	d	file:
@@ -3497,11 +3497,11 @@ SUCCESS	cmsis_boot/stm32f0xx.h	/^typedef enum {ERROR = 0, SUCCESS = !ERROR} Erro
 SVC_Handler	src/stm32f0xx_it.c	/^void SVC_Handler(void)$/;"	f
 SVC_IRQn	cmsis_boot/stm32f0xx.h	/^  SVC_IRQn                    = -5,     \/*!< 11 Cortex-M0 SV Call Interrupt                          *\/$/;"	e	enum:IRQn
 SWIER	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SWIER;        \/*!<EXTI Software interrupt event register,                   Address offset: 0x10 *\/$/;"	m	struct:__anon28
-SWITCHES_ROOF	src/hard.h	100;"	d
-SWITCHES_THRESHOLD_FULL	src/hard.h	101;"	d
-SWITCHES_THRESHOLD_HALF	src/hard.h	102;"	d
-SWITCHES_THRESHOLD_MIN	src/hard.h	103;"	d
-SWITCHES_TIMER_RELOAD	src/hard.h	98;"	d
+SWITCHES_ROOF	src/hard.h	103;"	d
+SWITCHES_THRESHOLD_FULL	src/hard.h	104;"	d
+SWITCHES_THRESHOLD_HALF	src/hard.h	105;"	d
+SWITCHES_THRESHOLD_MIN	src/hard.h	106;"	d
+SWITCHES_TIMER_RELOAD	src/hard.h	101;"	d
 SWTRIGR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t SWTRIGR;  \/*!< DAC software trigger register,                           Address offset: 0x04 *\/$/;"	m	struct:__anon24
 SYSCFG	cmsis_boot/stm32f0xx.h	974;"	d
 SYSCFG_BASE	cmsis_boot/stm32f0xx.h	911;"	d
@@ -3646,10 +3646,10 @@ SYSCFG_EXTICR4_EXTI15_PC	cmsis_boot/stm32f0xx.h	4579;"	d
 SYSCFG_EXTICR4_EXTI15_PD	cmsis_boot/stm32f0xx.h	4580;"	d
 SYSCFG_EXTICR4_EXTI15_PE	cmsis_boot/stm32f0xx.h	4581;"	d
 SYSCFG_TypeDef	cmsis_boot/stm32f0xx.h	/^} SYSCFG_TypeDef;$/;"	t	typeref:struct:__anon32
-S_FULL	src/hard.h	108;"	d
-S_HALF	src/hard.h	109;"	d
-S_MIN	src/hard.h	110;"	d
-S_NO	src/hard.h	111;"	d
+S_FULL	src/hard.h	111;"	d
+S_HALF	src/hard.h	112;"	d
+S_MIN	src/hard.h	113;"	d
+S_NO	src/hard.h	114;"	d
 SendCode16	src/codes.c	/^unsigned char SendCode16 (unsigned short code, unsigned char bits, unsigned short def_lambda)$/;"	f
 SendCode16Reset	src/codes.c	/^inline void SendCode16Reset (void)$/;"	f
 SetSysClock	cmsis_boot/system_stm32f0xx.c	/^static void SetSysClock(void)$/;"	f	file:
@@ -3724,8 +3724,8 @@ TIM6_DAC_IRQn	cmsis_boot/stm32f0xx.h	/^  TIM6_DAC_IRQn               = 17,     \
 TIM7	cmsis_boot/stm32f0xx.h	957;"	d
 TIM7_BASE	cmsis_boot/stm32f0xx.h	894;"	d
 TIMEOUTR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TIMEOUTR; \/*!< I2C Timeout register,              Address offset: 0x14 *\/$/;"	m	struct:__anon33
-TIMER_FOR_SAVE	src/hard.h	106;"	d
-TIMER_SLEEP	src/hard.h	105;"	d
+TIMER_FOR_SAVE	src/hard.h	109;"	d
+TIMER_SLEEP	src/hard.h	108;"	d
 TIMINGR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TIMINGR;  \/*!< I2C Timing register,               Address offset: 0x10 *\/$/;"	m	struct:__anon33
 TIM_14_Init	src/tim.c	/^void TIM_14_Init (void)$/;"	f
 TIM_16_Init	src/tim.c	/^void TIM_16_Init (void)$/;"	f
@@ -3961,9 +3961,9 @@ TT_TO_FREE_ERROR	src/main.c	51;"	d	file:
 TXCRCR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t TXCRCR;   \/*!< SPI Tx CRC register (not used in I2S mode),          Address offset: 0x18 *\/$/;"	m	struct:__anon38
 TXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TXDR;         \/*!< CEC Tx data register ,                                      Address offset:0x08 *\/$/;"	m	struct:__anon20
 TXDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t TXDR;     \/*!< I2C Transmit data register,        Address offset: 0x28 *\/$/;"	m	struct:__anon33
-TX_CODE	src/hard.h	35;"	d
-TX_CODE_OFF	src/hard.h	37;"	d
-TX_CODE_ON	src/hard.h	36;"	d
+TX_CODE	src/hard.h	38;"	d
+TX_CODE_OFF	src/hard.h	40;"	d
+TX_CODE_ON	src/hard.h	39;"	d
 TX_S	src/hard.h	/^	TX_S,$/;"	e	enum:__anon8
 TX_S_A	src/hard.h	/^	TX_S_A,$/;"	e	enum:__anon8
 TestStatus	src/flash_program.h	/^typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;$/;"	t	typeref:enum:__anon6
@@ -4122,9 +4122,10 @@ Update_TIM3_CH3	src/tim.c	/^void Update_TIM3_CH3 (unsigned short a)$/;"	f
 Update_TIM3_CH4	src/tim.c	/^void Update_TIM3_CH4 (unsigned short a)$/;"	f
 Update_TIM3_Freq	src/tim.c	/^void Update_TIM3_Freq (unsigned short a)$/;"	f
 VAL	cmsis_core/core_cm0.h	/^  __IO uint32_t VAL;                          \/*!< Offset: 0x08  SysTick Current Value Register      *\/$/;"	m	struct:__anon3
-VER_1_0	src/hard.h	12;"	d
+VER_1_1	src/hard.h	13;"	d
 WINR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t WINR; \/*!< IWDG Window register,    Address offset: 0x10 *\/$/;"	m	struct:__anon34
 WITH_EXTI	src/gpio.h	28;"	d
+WITH_INT	src/hard.h	17;"	d
 WPR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t WPR;        \/*!< RTC write protection register,                            Address offset: 0x24 *\/$/;"	m	struct:__anon37
 WRP0	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t WRP0;         \/*!< FLASH option byte write protection 0,          Address offset: 0x08 *\/$/;"	m	struct:__anon30
 WRP1	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t WRP1;         \/*!< FLASH option byte write protection 1,          Address offset: 0x0A *\/$/;"	m	struct:__anon30

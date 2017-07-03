@@ -66,13 +66,14 @@ void GPIO_Config (void)
 	//10: Pull-down
 	//11: Reserved
 
-#ifdef VER_1_0
+#if defined (VER_1_0) || defined (VER_1_1)
 #ifdef GPIOA_ENABLE
 
 	//--- GPIO A ---//
 	if (!GPIOA_CLK)
 		GPIOA_CLK_ON;
 
+#ifdef VER_1_0
 	temp = GPIOA->MODER;	//2 bits por pin
 	temp &= 0xFFFFC030;		//PA0 input; PA1 out; PA3 out; PA4 input; PA5 input; PA6 out
 	temp |= 0x00001044;
@@ -92,6 +93,91 @@ void GPIO_Config (void)
 	temp &= 0xFFFFFCFC;		//PA0 PA4 pull up
 	temp |= 0x00000101;
 	GPIOA->PUPDR = temp;
+#endif
+
+#ifdef VER_1_1
+	//--- GPIO A ---//
+	temp = GPIOA->MODER;	//2 bits por pin
+	temp &= 0xFFC30000;		//PA0 input; PA1 out; PA2 out; PA4 input; PA5 input; PA6 out
+	temp |= 0x00145054;		//PA2 PA7 PA9 PA10 out para pruebas
+	GPIOA->MODER = temp;
+
+	temp = GPIOA->OTYPER;	//1 bit por pin
+	temp &= 0xFFFFFFFF;
+	temp |= 0x00000000;
+	GPIOA->OTYPER = temp;
+
+	temp = GPIOA->OSPEEDR;	//2 bits por pin
+	temp &= 0xFFFFFF33;
+	temp |= 0x00000000;		//PA1 PA3 low speed
+	GPIOA->OSPEEDR = temp;
+
+	temp = GPIOA->PUPDR;	//2 bits por pin
+	temp &= 0xFFFFFCFC;		//PA0 PA4 pull up
+	temp |= 0x00000101;
+	GPIOA->PUPDR = temp;
+
+	//mando los 1's de pruebas PA2 PA7 PA9 PA10
+	GPIOA->BSRR = 0x00000684;
+
+	//--- GPIO B ---//
+	GPIOB_CLK_ON;
+
+	temp = GPIOB->MODER;	//2 bits por pin
+	temp &= 0xFFFFFFF3;		//PB1 (output)
+	temp |= 0x00000004;
+	GPIOB->MODER = temp;
+
+	temp = GPIOB->OTYPER;	//1 bit por pin
+	temp &= 0xFFFFFFFF;
+	temp |= 0x00000000;
+	GPIOB->OTYPER = temp;
+
+	temp = GPIOB->OSPEEDR;	//2 bits por pin
+	temp &= 0xFFFFFFFF;
+	temp |= 0x00000000;
+	GPIOB->OSPEEDR = temp;
+
+	temp = GPIOB->PUPDR;	//2 bits por pin
+	temp &= 0xFFFFFFFF;
+	temp |= 0x00000000;
+	GPIOB->PUPDR = temp;
+
+	//mando los 1's de pruebas PB1
+	GPIOB->BSRR = 0x00000002;
+
+	GPIOB_CLK_OFF;
+
+	//--- GPIO F ---//
+	GPIOF_CLK_ON;
+
+	temp = GPIOF->MODER;
+	temp &= 0xFFFFFFF0;
+	temp |= 0x00000005;
+	GPIOF->MODER = temp;
+
+	temp = GPIOF->OTYPER;
+	temp &= 0xFFFFFFFF;
+	temp |= 0x00000000;
+	GPIOF->OTYPER = temp;
+
+	temp = GPIOF->OSPEEDR;
+	temp &= 0xFFFFFFFF;
+	temp |= 0x00000000;
+	GPIOF->OSPEEDR = temp;
+
+	temp = GPIOF->PUPDR;
+	temp &= 0xFFFFFFFF;
+	temp |= 0x00000000;
+	GPIOF->PUPDR = temp;
+
+	//mando los 1's de pruebas PF0 PF1
+	GPIOF->BSRR = 0x00000003;
+
+	GPIOF_CLK_OFF;
+
+
+#endif
 
 
 #endif
@@ -209,9 +295,15 @@ inline void EXTIOn (void)
 	EXTI->IMR |= 0x00000011;
 }
 
+//Pone GPIO5 como entrada y habilita el PullUp
 void Gpio5PullUpOn (void)
 {
 	unsigned long temp;
+
+	temp = GPIOA->MODER;	//2 bits por pin
+	temp &= 0xFFFFF3FF;		//PA5 input
+	temp |= 0x00000000;
+	GPIOA->MODER = temp;
 
 	temp = GPIOA->PUPDR;	//2 bits por pin
 	temp &= 0xFFFFF3FF;		//PA5 pull up
@@ -219,14 +311,24 @@ void Gpio5PullUpOn (void)
 	GPIOA->PUPDR = temp;
 }
 
+//Deshabilita el PullUp de GPIO5 y lo pone como salida en 1
 void Gpio5PullUpOff (void)
 {
-//	unsigned long temp;
+	unsigned long temp;
 //	temp = GPIOA->PUPDR;	//2 bits por pin
 //	temp &= 0xFFFFCFFF;		//PA6 not pull up
 //	temp |= 0x00000000;
 //	GPIOA->PUPDR = temp;
 	GPIOA->PUPDR &= 0xFFFFF3FF;
+
+	temp = GPIOA->MODER;	//2 bits por pin
+	temp &= 0xFFFFF3FF;		//PA5 outut
+	temp |= 0x00000400;
+	GPIOA->MODER = temp;
+
+	//mando el 0 a PA5
+	GPIOA->BSRR = 0x00000020;
+
 }
 
 //--- end of file ---//
