@@ -79,7 +79,7 @@ int main(void)
 	RspMessages resp = RESP_CONTINUE;
 	MainStates main_state = CHECK_EVENTS;
 	unsigned char repeat;
-	unsigned short rxcode = 0;
+	unsigned int rxcode = 0;
 	unsigned char rxbits = 0;
 	unsigned short rxlambda = 0;
 
@@ -203,10 +203,6 @@ int main(void)
 			case TX_S_A:
 				if ((rxbits != 0) && (rxbits < 0xFF))
 					resp = SendCode16(rxcode, rxbits, rxlambda);
-					//resp = SendCode16(rxcode, 12);
-				else
-					resp = SendCode16(0x0555, 12, DEFAULT_LAMBDA);
-					//resp = SendCode16(0x0555, 12);
 
 				if (resp != RESP_CONTINUE)
 					main_state = TX_S;

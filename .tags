@@ -3650,7 +3650,7 @@ S_FULL	src/hard.h	111;"	d
 S_HALF	src/hard.h	112;"	d
 S_MIN	src/hard.h	113;"	d
 S_NO	src/hard.h	114;"	d
-SendCode16	src/codes.c	/^unsigned char SendCode16 (unsigned short code, unsigned char bits, unsigned short def_lambda)$/;"	f
+SendCode16	src/codes.c	/^unsigned char SendCode16 (unsigned int code, unsigned char bits, unsigned short def_lambda)$/;"	f
 SendCode16Reset	src/codes.c	/^inline void SendCode16Reset (void)$/;"	f
 SetSysClock	cmsis_boot/system_stm32f0xx.c	/^static void SetSysClock(void)$/;"	f	file:
 SysTick	cmsis_core/core_cm0.h	371;"	d
@@ -4113,7 +4113,7 @@ USART_TDR_TDR	cmsis_boot/stm32f0xx.h	5039;"	d
 USART_TypeDef	cmsis_boot/stm32f0xx.h	/^} USART_TypeDef;$/;"	t	typeref:struct:__anon41
 USER	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t USER;         \/*!< FLASH option byte user options,                Address offset: 0x02 *\/$/;"	m	struct:__anon30
 UpdateSwitches	src/main.c	/^void UpdateSwitches (void)$/;"	f
-UpdateTransitions	src/codes.c	/^unsigned char UpdateTransitions (unsigned char bits, unsigned short * rxcode, unsigned short * lambda)$/;"	f
+UpdateTransitions	src/codes.c	/^unsigned char UpdateTransitions (unsigned char bits, unsigned int * rxcode, unsigned short * lambda)$/;"	f
 Update_Boost	src/tim.h	81;"	d
 Update_Buck	src/tim.h	80;"	d
 Update_TIM3_CH1	src/tim.c	/^void Update_TIM3_CH1 (unsigned short a)$/;"	f
@@ -4274,20 +4274,20 @@ assemblersources	Makefile	/^assemblersources = $(ASRC)$/;"	m
 assert_param	cmsis_boot/stm32f0xx_conf.h	71;"	d
 assert_param	cmsis_boot/stm32f0xx_conf.h	75;"	d
 assobjects	Makefile	/^assobjects = $(assemblersources:.s=.o)$/;"	m
-bitmask	src/codes.c	/^unsigned short bitmask;$/;"	v
+bitmask	src/codes.c	/^unsigned int bitmask;$/;"	v
 bits_button_one	src/flash_program.h	/^	unsigned char	bits_button_one;$/;"	m	struct:parameters
 bits_button_two	src/flash_program.h	/^	unsigned char	bits_button_two;$/;"	m	struct:parameters
 bits_c	src/codes.c	/^unsigned char bits_c;$/;"	v
 bits_t	src/codes.c	/^unsigned short bits_t [SIZEOF_BUFF_TRANS];$/;"	v
-code_button_one	src/flash_program.h	/^	unsigned short	code_button_one;$/;"	m	struct:parameters
-code_button_two	src/flash_program.h	/^	unsigned short	code_button_two;$/;"	m	struct:parameters
+code_button_one	src/flash_program.h	/^	unsigned int	code_button_one;$/;"	m	struct:parameters
+code_button_two	src/flash_program.h	/^	unsigned int	code_button_two;$/;"	m	struct:parameters
 dummy1	src/flash_program.h	/^	unsigned char dummy1;	\/\/corrige desplazamiento de memoria$/;"	m	struct:parameters
 dummy2	src/flash_program.h	/^	unsigned char dummy2;	\/\/corrige desplazamiento de memoria$/;"	m	struct:parameters
 errno	cmsis_boot/syscalls/syscalls.c	11;"	d	file:
 g_pfnVectors	cmsis_boot/startup/startup_stm32f0xx.s	/^g_pfnVectors:$/;"	l
 lambda	src/codes.c	/^unsigned short lambda;$/;"	v
-lambda_button_one	src/flash_program.h	/^	unsigned short 	lambda_button_one;	\/\/5 bytes$/;"	m	struct:parameters
-lambda_button_two	src/flash_program.h	/^	unsigned short 	lambda_button_two;	\/\/10 bytes$/;"	m	struct:parameters
+lambda_button_one	src/flash_program.h	/^	unsigned short 	lambda_button_one;	\/\/7 bytes$/;"	m	struct:parameters
+lambda_button_two	src/flash_program.h	/^	unsigned short 	lambda_button_two;	\/\/14 bytes$/;"	m	struct:parameters
 link	cmsis_boot/syscalls/syscalls.c	/^int link(char *old, char *new) {$/;"	f
 main	src/main.c	/^int main(void)$/;"	f
 objects	Makefile	/^objects = $(sources:.c=.o)$/;"	m

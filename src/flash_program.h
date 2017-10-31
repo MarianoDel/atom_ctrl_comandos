@@ -60,13 +60,13 @@ typedef enum
 //OJO esta estructuras deben estar alineadas en 4 bytes
 typedef struct parameters {
 
-	unsigned short	code_button_one;
+	unsigned int	code_button_one;
 	unsigned char	bits_button_one;
-	unsigned short 	lambda_button_one;	//5 bytes
+	unsigned short 	lambda_button_one;	//7 bytes
 
-	unsigned short	code_button_two;
+	unsigned int	code_button_two;
 	unsigned char	bits_button_two;
-	unsigned short 	lambda_button_two;	//10 bytes
+	unsigned short 	lambda_button_two;	//14 bytes
 
 	unsigned char dummy1;	//corrige desplazamiento de memoria
 	unsigned char dummy2;	//corrige desplazamiento de memoria

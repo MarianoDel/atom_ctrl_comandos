@@ -17,7 +17,7 @@
 //--- Global Variables -------
 unsigned char send_state = 0;
 unsigned char recv_state = 0;
-unsigned short bitmask;
+unsigned int bitmask;
 unsigned short lambda;
 
 unsigned short bits_t [SIZEOF_BUFF_TRANS];
@@ -29,7 +29,7 @@ unsigned char bits_c;
 
 //Envia el codigo de hasta 2 bytes (16bits), c es codigo, bits a enviar
 //contesta RESP_CONTINUE si falta o RESP_OK si termino RESP_NOK en error
-unsigned char SendCode16 (unsigned short code, unsigned char bits, unsigned short def_lambda)
+unsigned char SendCode16 (unsigned int code, unsigned char bits, unsigned short def_lambda)
 {
 	RspMessages resp = RESP_CONTINUE;
 
@@ -37,7 +37,7 @@ unsigned char SendCode16 (unsigned short code, unsigned char bits, unsigned shor
 	switch (send_state)
 	{
 		case C_INIT:
-			if ((bits > 16) || (bits == 0))
+			if ((bits > 28) || (bits == 0))
 				resp = RESP_NOK;
 			else
 			{
@@ -69,8 +69,8 @@ unsigned char SendCode16 (unsigned short code, unsigned char bits, unsigned shor
 			break;
 
 		case C_SEND_PILOT_B:
-			//if (TIM16->CNT > (lambda))
-			if (TIM16->CNT > 900)		//el algoritmo es mas corto cuando entra por S1 q cuando entra por S2
+			if (TIM16->CNT > (lambda))
+			// if (TIM16->CNT > 900)		//el algoritmo es mas corto cuando entra por S1 q cuando entra por S2
 			{
 				//TIM16->CNT = 0;
 				LED_OFF;
@@ -231,7 +231,7 @@ unsigned char RecvCode16 (unsigned char * bits)
 			{
 				bits_c -= 1;	//ajusto pilot
 				bits_c >>= 1;	//2 transciciones 1 bit
-				if (bits_c == 12)
+				if ((bits_c == 12) || (bits_c == 28))
 					recv_state = C_RXOK;
 				else
 					recv_state = C_RXERROR;
@@ -296,7 +296,7 @@ unsigned char RecvCode16 (unsigned char * bits)
 //Recibe cantidad de bits
 //contesta con punteros a codigo, lambda rx
 //contesta con RESP_OK o RESP_NOK cuando valida el codigo
-unsigned char UpdateTransitions (unsigned char bits, unsigned short * rxcode, unsigned short * lambda)
+unsigned char UpdateTransitions (unsigned char bits, unsigned int * rxcode, unsigned short * lambda)
 {
 	RspMessages resp = RESP_OK;
 	unsigned char i;
@@ -316,6 +316,9 @@ unsigned char UpdateTransitions (unsigned char bits, unsigned short * rxcode, un
 	lambda15 = *lambda * 3;
 	lambda15 >>= 1;
 
+	//compenso diferencias en el timer para lambda 30us
+	*lambda -= 20;
+
 	//compenso offset de bits
 	bits -= 1;
 	for (i = 0; i < transitions; i += 2)
@@ -323,7 +326,7 @@ unsigned char UpdateTransitions (unsigned char bits, unsigned short * rxcode, un
 		//veo si es 0
 		if ((bits_t[i + 1] < lambda15) && (bits_t[i + 2] > lambda15))
 		{
-			*rxcode &= 0xFFFE;
+			*rxcode &= 0xFFFFFFFE;
 			if (bits)
 				*rxcode <<= 1;
 			bits--;
@@ -346,4 +349,3 @@ unsigned char UpdateTransitions (unsigned char bits, unsigned short * rxcode, un
 
 	return resp;
 }
-
