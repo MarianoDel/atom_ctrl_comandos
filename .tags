@@ -3651,6 +3651,7 @@ S_HALF	src/hard.h	112;"	d
 S_MIN	src/hard.h	113;"	d
 S_NO	src/hard.h	114;"	d
 SendCode16	src/codes.c	/^unsigned char SendCode16 (unsigned int code, unsigned char bits, unsigned short def_lambda)$/;"	f
+SendCode16FixLambda	src/codes.c	/^unsigned char SendCode16FixLambda (unsigned int code, unsigned char bits, unsigned short lambda_on, unsigned short lambda_off)$/;"	f
 SendCode16Reset	src/codes.c	/^inline void SendCode16Reset (void)$/;"	f
 SetSysClock	cmsis_boot/system_stm32f0xx.c	/^static void SetSysClock(void)$/;"	f	file:
 SysTick	cmsis_core/core_cm0.h	371;"	d
