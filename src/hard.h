@@ -12,6 +12,21 @@
 //#define VER_1_0
 #define VER_1_1
 
+//------ Codes Configuration -------------------------//
+#define		DEFAULT_LAMBDA		540		//en us
+#define REPEAT_CODES	9
+
+//-------- Pilot Code Configuration -----------------------//
+// #define USE_PILOT_SHUFFLE
+// #define USE_PILOT_FIXED_600
+#define USE_PILOT_FIXED_900
+// #define USE_PILOT_DECREMENT
+
+
+#define PILOT_600US			585
+#define PILOT_900US			900
+
+
 //--- Pruebas de hardware, consumo sin int
 //#define WITHOUT_INT
 #define WITH_INT
@@ -97,7 +112,7 @@ enum {
 
 } typedef MainStates;
 
-#define REPEAT_CODES	9
+
 #define SWITCHES_TIMER_RELOAD	10
 
 #define SWITCHES_ROOF			400

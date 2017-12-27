@@ -71,8 +71,143 @@ unsigned char SendCode16 (unsigned int code, unsigned char bits, unsigned short 
 		case C_SEND_PILOT_B:
 			// if (TIM16->CNT > (lambda + 100))		//algunos placas reciben otras no 26-12-17
 			// if (TIM16->CNT > (lambda))
-			// if (TIM16->CNT > 900)		//el algoritmo es mas corto cuando entra por S1 q cuando entra por S2
-			if (TIM16->CNT > 585)		//27-12-17 600us pilot
+			// if (TIM16->CNT > PILOT_900US)		//el algoritmo es mas corto cuando entra por S1 q cuando entra por S2
+			if (TIM16->CNT > PILOT_600US)		//27-12-17 600us pilot
+			{
+				//TIM16->CNT = 0;
+				LED_OFF;
+				TX_CODE_OFF;			//apago, siempre despues de pilot
+				send_state = C_SENDING;
+			}
+			break;
+
+		case C_SENDING:
+			if (bitmask)
+			{
+				if (code & bitmask)
+					send_state = C_SEND_ONE_A;
+				else
+					send_state = C_SEND_ZERO_A;
+
+				bitmask >>= 1;
+			}
+			else
+			{
+				TIM16Disable();
+				resp = RESP_OK;		//termine de enviar
+			}
+			break;
+
+		case C_SEND_ONE_A:
+			LED_OFF;
+			TX_CODE_OFF;
+			TIM16->CNT = 0;
+			send_state = C_SEND_ONE_B;
+			break;
+
+		case C_SEND_ONE_B:
+			if (TIM16->CNT > (2*lambda))
+			{
+				TIM16->CNT = 0;
+				LED_ON;
+				TX_CODE_ON;
+				send_state = C_SEND_ONE_C;
+			}
+			break;
+
+		case C_SEND_ONE_C:
+			if (TIM16->CNT > (lambda))
+			{
+				TIM16->CNT = 0;
+				LED_OFF;
+				TX_CODE_OFF;
+				send_state = C_SENDING;
+			}
+			break;
+
+		case C_SEND_ZERO_A:
+			LED_OFF;
+			TX_CODE_OFF;
+			TIM16->CNT = 0;
+			send_state = C_SEND_ZERO_B;
+			break;
+
+		case C_SEND_ZERO_B:
+			if (TIM16->CNT > (lambda))
+			//if (TIM16->CNT > (360))
+			{
+				TIM16->CNT = 0;
+				LED_ON;
+				TX_CODE_ON;
+				send_state = C_SEND_ZERO_C;
+			}
+			break;
+
+		case C_SEND_ZERO_C:
+			if (TIM16->CNT > (2*lambda))
+			//if (TIM16->CNT > (1280))
+			{
+				TIM16->CNT = 0;
+				LED_OFF;
+				TX_CODE_OFF;
+				send_state = C_SENDING;
+			}
+			break;
+
+		default:
+			send_state = C_INIT;
+			break;
+	}
+	return resp;
+}
+
+//Envia el codigo de hasta 4 bytes (28bits), c es codigo, bits a enviar
+//contesta RESP_CONTINUE si falta o RESP_OK si termino RESP_NOK en error
+unsigned char SendCode16WithPilot (unsigned int code, unsigned char bits, unsigned short def_lambda, unsigned short pilot)
+{
+	RspMessages resp = RESP_CONTINUE;
+
+
+	switch (send_state)
+	{
+		case C_INIT:
+			if ((bits > 28) || (bits == 0))
+				resp = RESP_NOK;
+			else
+			{
+				bits = bits - 1;	//quito offset
+				bitmask = 1;
+				bitmask <<= bits;
+
+				if (!def_lambda)
+					resp = RESP_NOK;
+				else
+					lambda = def_lambda;
+
+				send_state = C_SEND_PILOT_A;
+				TIM16->CNT = 0;
+				TIM16Enable();
+				LED_OFF;
+				TX_CODE_OFF;
+			}
+			break;
+
+		case C_SEND_PILOT_A:
+			if (TIM16->CNT > (36*lambda))		//espacio entre transmisiones
+			{
+				TIM16->CNT = 0;
+				LED_ON;
+				TX_CODE_ON;			//bit de pilot
+				send_state = C_SEND_PILOT_B;
+			}
+			break;
+
+		case C_SEND_PILOT_B:
+			// if (TIM16->CNT > (lambda + 100))		//algunos placas reciben otras no 26-12-17
+			// if (TIM16->CNT > (lambda))
+			// if (TIM16->CNT > PILOT_900US)		//el algoritmo es mas corto cuando entra por S1 q cuando entra por S2
+			// if (TIM16->CNT > PILOT_600US)		//27-12-17 600us pilot
+			if (TIM16->CNT > pilot)
 			{
 				//TIM16->CNT = 0;
 				LED_OFF;

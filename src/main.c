@@ -83,6 +83,10 @@ int main(void)
 	unsigned char rxbits = 0;
 	unsigned short rxlambda = 0;
 
+#ifdef USE_PILOT_DECREMENT
+	unsigned short pilot;
+#endif
+
 
 
 	//!< At this stage the microcontroller clock setting is already configured,
@@ -189,6 +193,9 @@ int main(void)
 			case TX_S:
 				if (repeat)
 				{
+#ifdef USE_PILOT_DECREMENT
+					pilot = (PILOT_900US - (REPEAT_CODES - repeat) * 33);
+#endif
 					repeat--;
 					SendCode16Reset();
 					main_state = TX_S_A;
@@ -202,11 +209,32 @@ int main(void)
 
 			case TX_S_A:
 				if ((rxbits != 0) && (rxbits < 0xFF))
-					resp = SendCode16(rxcode, rxbits, rxlambda);
-					// resp = SendCode16(rxcode, rxbits, 600);		//mando con lambda fijo
-					// resp = SendCode16FixLambda(rxcode, rxbits, 620, 960);		//mando con lambda fijo
+				{
+#ifdef USE_PILOT_SHUFFLE
+					if (repeat <= 4)
+						resp = SendCode16WithPilot(rxcode, rxbits, rxlambda, PILOT_900US);
+					else
+						resp = SendCode16WithPilot(rxcode, rxbits, rxlambda, PILOT_600US);
+#endif
+
+#ifdef USE_PILOT_FIXED_600
+					resp = SendCode16WithPilot(rxcode, rxbits, rxlambda, PILOT_600US);
+#endif
+
+#ifdef USE_PILOT_FIXED_900
+					resp = SendCode16WithPilot(rxcode, rxbits, rxlambda, PILOT_900US);
+#endif
+#ifdef USE_PILOT_DECREMENT
+					resp = SendCode16WithPilot(rxcode, rxbits, rxlambda, pilot);
+#endif
+
+					// if (repeat & 0x01)	//impar
+					// 	resp = SendCode16WithPilot(rxcode, rxbits, rxlambda, PILOT_900US);
+					// else
+					// 	resp = SendCode16WithPilot(rxcode, rxbits, rxlambda, PILOT_600US);
+				}
 				else
-					resp = SendCode16(0x550, 12, 600);
+					resp = SendCode16(0x550, 12, PILOT_600US);
 
 				if (resp != RESP_CONTINUE)
 					main_state = TX_S;

@@ -17,7 +17,7 @@
 
 
 
-#define		DEFAULT_LAMBDA		540		//en us
+
 //Code States
 enum {
 	C_INIT = 0,
@@ -49,6 +49,7 @@ enum {
 //--- Funciones del Modulo ---
 unsigned char SendCode16 (unsigned int, unsigned char, unsigned short);
 unsigned char SendCode16FixLambda (unsigned int, unsigned char, unsigned short, unsigned short);
+unsigned char SendCode16WithPilot (unsigned int, unsigned char, unsigned short, unsigned short);
 void SendCode16Reset (void);
 unsigned char RecvCode16 (unsigned char *);
 void RecvCode16Reset (void);
