@@ -202,8 +202,8 @@ int main(void)
 
 			case TX_S_A:
 				if ((rxbits != 0) && (rxbits < 0xFF))
-					// resp = SendCode16(rxcode, rxbits, rxlambda);
-					resp = SendCode16(rxcode, rxbits, 600);		//mando con lambda fijo
+					resp = SendCode16(rxcode, rxbits, rxlambda);
+					// resp = SendCode16(rxcode, rxbits, 600);		//mando con lambda fijo
 					// resp = SendCode16FixLambda(rxcode, rxbits, 620, 960);		//mando con lambda fijo
 				else
 					resp = SendCode16(0x550, 12, 600);
@@ -369,7 +369,7 @@ int main(void)
 					param_struct.lambda_button_two = rxlambda;
 				}
 
-				WriteConfigurations ();
+				WriteConfigurations (&param_struct);
 
 				main_state =  CHECK_EVENTS;
 				break;

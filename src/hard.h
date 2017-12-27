@@ -97,7 +97,7 @@ enum {
 
 } typedef MainStates;
 
-#define REPEAT_CODES	3
+#define REPEAT_CODES	9
 #define SWITCHES_TIMER_RELOAD	10
 
 #define SWITCHES_ROOF			400

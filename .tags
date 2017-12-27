@@ -1921,14 +1921,14 @@ FLASH_CR_PG	cmsis_boot/stm32f0xx.h	2993;"	d
 FLASH_CR_STRT	cmsis_boot/stm32f0xx.h	2998;"	d
 FLASH_ERROR_PROGRAM	src/flash_program.h	/^  FLASH_ERROR_PROGRAM,$/;"	e	enum:__anon5
 FLASH_ERROR_WRP	src/flash_program.h	/^  FLASH_ERROR_WRP,$/;"	e	enum:__anon5
-FLASH_ER_PRG_TIMEOUT	src/flash_program.h	44;"	d
+FLASH_ER_PRG_TIMEOUT	src/flash_program.h	48;"	d
 FLASH_ErasePage	src/flash_program.c	/^FLASH_Status FLASH_ErasePage(uint32_t Page_Address)$/;"	f
 FLASH_FKEY1	cmsis_boot/stm32f0xx.h	2977;"	d
 FLASH_FKEY2	cmsis_boot/stm32f0xx.h	2978;"	d
-FLASH_FLAG_BSY	src/flash_program.h	50;"	d
-FLASH_FLAG_EOP	src/flash_program.h	53;"	d
-FLASH_FLAG_PGERR	src/flash_program.h	51;"	d
-FLASH_FLAG_WRPERR	src/flash_program.h	52;"	d
+FLASH_FLAG_BSY	src/flash_program.h	54;"	d
+FLASH_FLAG_EOP	src/flash_program.h	57;"	d
+FLASH_FLAG_PGERR	src/flash_program.h	55;"	d
+FLASH_FLAG_WRPERR	src/flash_program.h	56;"	d
 FLASH_GetStatus	src/flash_program.c	/^FLASH_Status FLASH_GetStatus(void)$/;"	f
 FLASH_IRQn	cmsis_boot/stm32f0xx.h	/^  FLASH_IRQn                  = 3,      \/*!< FLASH Interrupt                                         *\/$/;"	e	enum:IRQn
 FLASH_KEYR_FKEYR	cmsis_boot/stm32f0xx.h	2971;"	d
@@ -2482,8 +2482,8 @@ ISR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ISR;       \/*!< TSC interrupt stat
 ISR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ISR;      \/*!< I2C Interrupt and status register, Address offset: 0x18 *\/$/;"	m	struct:__anon33
 ISR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t ISR;    \/*!< USART Interrupt and status register,      Address offset: 0x1C *\/$/;"	m	struct:__anon41
 ISR	cmsis_boot/stm32f0xx.h	/^__IO uint32_t ISR;    \/*!< CRS interrupt and status register,  Address offset: 0x08 *\/$/;"	m	struct:__anon23
-IS_FLASH_CLEAR_FLAG	src/flash_program.h	55;"	d
-IS_FLASH_GET_FLAG	src/flash_program.h	57;"	d
+IS_FLASH_CLEAR_FLAG	src/flash_program.h	59;"	d
+IS_FLASH_GET_FLAG	src/flash_program.h	61;"	d
 IS_FUNCTIONAL_STATE	cmsis_boot/stm32f0xx.h	368;"	d
 ITStatus	cmsis_boot/stm32f0xx.h	/^typedef enum {RESET = 0, SET = !RESET} FlagStatus, ITStatus;$/;"	t	typeref:enum:__anon11
 IWDG	cmsis_boot/stm32f0xx.h	961;"	d
@@ -2567,16 +2567,18 @@ OPTKEYR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t OPTKEYR;      \/*!<FLASH OPT ke
 OR	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t OR;              \/*!< TIM option register,                         Address offset: 0x50 *\/$/;"	m	struct:__anon39
 OSPEEDR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t OSPEEDR;      \/*!< GPIO port output speed register,                          Address offset: 0x08 *\/$/;"	m	struct:__anon31
 OTYPER	cmsis_boot/stm32f0xx.h	/^  __IO uint16_t OTYPER;       \/*!< GPIO port output type register,                           Address offset: 0x04 *\/$/;"	m	struct:__anon31
-PAGE27	src/flash_program.h	22;"	d
-PAGE28	src/flash_program.h	23;"	d
+PAGE15	src/flash_program.h	22;"	d
+PAGE27	src/flash_program.h	24;"	d
+PAGE28	src/flash_program.h	25;"	d
 PAGE28_START	src/flash_program.h	16;"	d
-PAGE29	src/flash_program.h	24;"	d
+PAGE29	src/flash_program.h	26;"	d
 PAGE29_START	src/flash_program.h	17;"	d
-PAGE30	src/flash_program.h	25;"	d
+PAGE30	src/flash_program.h	27;"	d
 PAGE30_START	src/flash_program.h	18;"	d
-PAGE31	src/flash_program.h	26;"	d
+PAGE31	src/flash_program.h	28;"	d
 PAGE31_END	src/flash_program.h	20;"	d
 PAGE31_START	src/flash_program.h	19;"	d
+PAGE63	src/flash_program.h	30;"	d
 PASSED	src/flash_program.h	/^typedef enum {FAILED = 0, PASSED = !FAILED} TestStatus;$/;"	e	enum:__anon6
 PECR	cmsis_boot/stm32f0xx.h	/^  __IO uint32_t PECR;     \/*!< I2C PEC register,                  Address offset: 0x20 *\/$/;"	m	struct:__anon33
 PERIPH_BASE	cmsis_boot/stm32f0xx.h	884;"	d
@@ -4161,7 +4163,7 @@ WWDG_IRQn	cmsis_boot/stm32f0xx.h	/^  WWDG_IRQn                   = 0,      \/*!<
 WWDG_SR_EWIF	cmsis_boot/stm32f0xx.h	5076;"	d
 WWDG_TypeDef	cmsis_boot/stm32f0xx.h	/^} WWDG_TypeDef;$/;"	t	typeref:struct:__anon42
 Wait_ms	src/tim.c	/^void Wait_ms (unsigned short wait)$/;"	f
-WriteConfigurations	src/flash_program.c	/^unsigned char WriteConfigurations (void)$/;"	f
+WriteConfigurations	src/flash_program.c	/^unsigned char WriteConfigurations (parameters_typedef * p_param)$/;"	f
 WriteFlash	src/flash_program.c	/^unsigned char WriteFlash(unsigned int * p, uint32_t p_addr, unsigned char with_lock, unsigned char len_in_4)$/;"	f
 WritePage	src/flash_program.c	/^unsigned char WritePage(unsigned int * p, uint32_t p_addr, unsigned char with_lock)$/;"	f
 _BIT_SHIFT	cmsis_core/core_cm0.h	807;"	d

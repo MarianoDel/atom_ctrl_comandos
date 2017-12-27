@@ -27,7 +27,7 @@ unsigned char bits_c;
 
 //--- Module Functions -------
 
-//Envia el codigo de hasta 2 bytes (16bits), c es codigo, bits a enviar
+//Envia el codigo de hasta 4 bytes (28bits), c es codigo, bits a enviar
 //contesta RESP_CONTINUE si falta o RESP_OK si termino RESP_NOK en error
 unsigned char SendCode16 (unsigned int code, unsigned char bits, unsigned short def_lambda)
 {
@@ -59,7 +59,7 @@ unsigned char SendCode16 (unsigned int code, unsigned char bits, unsigned short 
 			break;
 
 		case C_SEND_PILOT_A:
-			if (TIM16->CNT > (36*lambda))
+			if (TIM16->CNT > (36*lambda))		//espacio entre transmisiones
 			{
 				TIM16->CNT = 0;
 				LED_ON;
@@ -69,9 +69,10 @@ unsigned char SendCode16 (unsigned int code, unsigned char bits, unsigned short 
 			break;
 
 		case C_SEND_PILOT_B:
-			if (TIM16->CNT > (lambda + 100))		//algunos placas reciben otras no
+			// if (TIM16->CNT > (lambda + 100))		//algunos placas reciben otras no 26-12-17
 			// if (TIM16->CNT > (lambda))
 			// if (TIM16->CNT > 900)		//el algoritmo es mas corto cuando entra por S1 q cuando entra por S2
+			if (TIM16->CNT > 585)		//27-12-17 600us pilot
 			{
 				//TIM16->CNT = 0;
 				LED_OFF;

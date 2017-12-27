@@ -19,11 +19,15 @@
 #define PAGE31_START	768
 #define PAGE31_END		1023
 
+#define PAGE15			((uint32_t)0x08003C00)
+
 #define PAGE27			((uint32_t)0x08006C00)
 #define PAGE28			((uint32_t)0x08007000)
 #define PAGE29			((uint32_t)0x08007400)
 #define PAGE30			((uint32_t)0x08007800)
 #define PAGE31			((uint32_t)0x08007C00)
+
+#define PAGE63       ((uint32_t)0x0800FC00)
 
 //de libreria st las tiene #include "stm32f0xx_flash.h"
 /**
@@ -91,7 +95,7 @@ FLASH_Status FLASH_ProgramWord(uint32_t Address, uint32_t Data);
 FLASH_Status FLASH_WaitForLastOperation(uint32_t Timeout);
 FLASH_Status FLASH_GetStatus(void);
 
-unsigned char WriteConfigurations (void);
+unsigned char WriteConfigurations (parameters_typedef *);
 unsigned char WriteFlash(unsigned int * p, uint32_t p_addr, unsigned char with_lock, unsigned char len_in_4);
 
 #endif

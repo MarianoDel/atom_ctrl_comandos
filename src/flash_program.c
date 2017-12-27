@@ -303,16 +303,14 @@ unsigned char WritePage(unsigned int * p, uint32_t p_addr, unsigned char with_lo
 }
 
 
-unsigned char WriteConfigurations (void)
+unsigned char WriteConfigurations (parameters_typedef * p_param)
 {
-	parameters_typedef * p_param;
-
-	ErasePage(PAGE31,0);
+	ErasePage(PAGE15,0);
 
 	//update en memoria
-	p_param = &param_struct;
+	//p_param = &param_struct;
 
-	if (WriteFlash((unsigned int *) p_param, PAGE31, 1, sizeof(parameters_typedef)) == FAILED)
+	if (WriteFlash((unsigned int *) p_param, PAGE15, 1, sizeof(parameters_typedef)) == FAILED)
 		return FAILED;
 
 	return PASSED;

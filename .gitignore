@@ -9,4 +9,5 @@
 dimmer_model.*
 rdm_responder.*
 transceiver.*
+*.zip
 #rdm_util.*	##la gregue al proyecto 30-03-2016
